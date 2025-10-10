@@ -1,20 +1,17 @@
-import express from "express";
-import dotenv from "dotenv";
-import connectDB from "./config/dbConfig.js";
-
-dotenv.config();
+const express = require('express');
+const authRoutes = require('./routes/authRoutes');
+const errorHandler = require('./middleware/ErrorHandler');
 
 const app = express();
+
 app.use(express.json());
 
-// Connect to MongoDB
-connectDB();
+app.use('/api/auth', authRoutes);
 
-// Test route
-app.get("/", (req, res) => {
-  res.send("🚀 TirelireAPI with MongoDB is running!");
+app.get('/', (req,res) => {
+  res.json({message: 'Tirelire API is running!'});
 });
 
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`✅ Server started on port ${PORT}`));
+app.use(errorHandler);
+module.exports = app;
+ 
