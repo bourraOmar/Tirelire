@@ -12,12 +12,19 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "canvas": "^3.2.0",
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
+    "face-api.js": "^0.22.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.19.1"
+    "mongoose": "^8.19.1",
+    "multer": "^2.0.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "eslint": "^9.37.0",
+    "globals": "^16.4.0",
     "nodemon": "^3.1.0"
   }
 }
