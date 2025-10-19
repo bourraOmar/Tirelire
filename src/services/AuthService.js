@@ -78,7 +78,7 @@ const loginUser = async ({ email, password }) => {
 };
 
 const getUserProfile = async userId => {
-	const user = await User.findById(userId).populate('groups payments messages tickets');
+	const user = await User.findById(userId);
 	if (!user) {
 		const error = new Error('User not found');
 		error.statusCode = 404;
