@@ -1,8 +1,30 @@
-require('dotenv').config();
+const mongoose = require('mongoose');
 
-module.exports = {
-  PORT: process.env.PORT || 5000,
-  MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/tirelireDB',
-  JWT_SECRET: process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-in-prod',
-  JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '7d'
-};
+const connectDB = async () => {
+    try {
+        const databaseUrl = process.env.MONGODB_URI;
+
+        const conn = await mongoose.connect(databaseUrl, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+
+        console.log(`MongoDB Connected with Success`);
+    } catch (error) {
+        console.error('Database connection error:', error.message);
+        process.exit(1);
+    }
+}
+
+
+mongoose.connection.on('disconnected', () => {
+  console.log('MongoDB disconnected');
+});
+
+
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
+
+
+module.exports = connectDB;
