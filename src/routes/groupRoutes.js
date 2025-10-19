@@ -1,15 +1,17 @@
 const express = require('express');
-const router = express.Router();
-const authMiddleware = require('../middleware/AuthMiddleware');
-const kycVerified = require('../middleware/KycVerified');
 const groupController = require('../controllers/GroupController');
+const authMiddleware = require('../middleware/AuthMiddleware');
 
-router.post('/', authMiddleware, kycVerified, groupController.createGroup);
+const router = express.Router();
 
-router.post('/:groupId/join', authMiddleware, kycVerified, groupController.joinGroup);
+router.use(authMiddleware);
 
-router.get('/my', authMiddleware, groupController.getMyGroups);
-
-router.get('/:groupId', authMiddleware, groupController.getGroupById);
+router.post('/', groupController.createGroup);
+router.get('/', groupController.getMyGroups);
+router.get('/:groupId', groupController.getGroupById);
+router.put('/:groupId', groupController.updateGroup);
+router.delete('/:groupId', groupController.deleteGroup);
+router.post('/:groupId/members', groupController.addMember);
+router.delete('/:groupId/members/:memberId', groupController.removeMember);
 
 module.exports = router;
