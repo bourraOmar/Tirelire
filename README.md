@@ -136,6 +136,3 @@ Prochaines améliorations recommandées
 Contact
 -------
 Pour toute question sur le code : Omar Bourra
-
----
-Fichier généré automatiquement : README technique minimal pour le projet Tirelire.
